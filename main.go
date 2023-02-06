@@ -1,13 +1,10 @@
 package main
 
 import (
-	"bytes"
+	"RemoteMasterRAT/darwin"
+	"RemoteMasterRAT/windows"
 	"fmt"
-	"github.com/gonutz/w32/v2"
-	"log"
-	"os/exec"
 	"runtime"
-	"strings"
 )
 
 func main() {
@@ -16,19 +13,11 @@ func main() {
 	switch os {
 
 	case "windows":
-		v := w32.RtlGetVersion()
-		fmt.Println(v.BuildNumber)
+		build, _ := windows.BuildNumberWindows()
+		fmt.Println(build)
 	case "darwin":
-		cmd := exec.Command("sw_vers")
-		cmd.Stdin = strings.NewReader("Version input")
-		var out bytes.Buffer
-		var stderr bytes.Buffer
-		cmd.Stdout = &out
-		cmd.Stderr = &stderr
-		err := cmd.Run()
-		if err != nil {
-			log.Fatal(err)
-		}
-	}
+		build, _ := darwin.BuildNumberDarwin()
+		fmt.Println(build)
 
+	}
 }
