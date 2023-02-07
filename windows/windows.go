@@ -3,9 +3,11 @@
 package windows
 
 import (
+	"fmt"
 	"github.com/gonutz/w32/v2"
 	"os/exec"
 	"strconv"
+	"strings"
 )
 
 func BuildNumberWindows() (string, error) {
@@ -14,5 +16,15 @@ func BuildNumberWindows() (string, error) {
 }
 
 func GetShellWindows() string {
-	exec.Command("(dir 2>&1 *`|echo CMD);&<# rem #>echo ($PSVersionTable).PSEdition")
+	cmd := exec.Command("powershell", "(dir 2>&1 *`|echo CMD);&<# rem #>echo ($PSVersionTable).PSEdition")
+
+	cmd.Stdin = strings.NewReader("Version data")
+
+	data, err := cmd.Output()
+	if err != nil {
+		fmt.Println(err.Error())
+		return ""
+	}
+
+	return string(data)
 }
