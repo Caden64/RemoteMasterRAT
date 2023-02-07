@@ -9,7 +9,6 @@ import (
 
 func main() {
 	os := runtime.GOOS
-	fmt.Println(os)
 	switch os {
 
 	case "windows":
@@ -18,6 +17,7 @@ func main() {
 	case "darwin":
 		build, _ := darwin.BuildNumberDarwin()
 		fmt.Println(build)
-
+		shell := darwin.GetShellDarwin()
+		fmt.Println(shell)
 	}
 }

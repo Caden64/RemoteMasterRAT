@@ -2,6 +2,6 @@
 
 package darwin
 
-func BuildNumberDarwin() (string, error) {
-	return "", nil
+func BuildNumberDarwin() (ProductInfo, error) {
+	return ProductInfo{}, nil
 }

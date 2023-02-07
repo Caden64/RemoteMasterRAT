@@ -5,3 +5,7 @@ package windows
 func BuildNumberWindows() (string, error) {
 	return "", nil
 }
+
+func GetShellWindows() (string, error) {
+	return "", nil
+}
